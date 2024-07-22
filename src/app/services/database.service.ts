@@ -11,11 +11,9 @@ export class DatabaseService {
 
   constructor(private firestore: AngularFirestore) { }
 
-  cargarUsuarios()
-  {
+  cargarUsuarios() {
     console.log("Utilizo servicio Database");
-    this.getCollectionObservable("usuarios").subscribe((next : any) => 
-    {
+    this.getCollectionObservable("usuarios").subscribe((next : any) =>  {
       let result : Array<any>  = next;
       this.usuariosBD = [];
       
@@ -26,23 +24,23 @@ export class DatabaseService {
     console.log("Finalizo inicializacion");
   }
 
-  traerUnDocumento(coleccion: string, id: string)
-  {
+  traerUnDocumento(coleccion: string, id: string) {
     return this.firestore.firestore.doc(coleccion + '/' + id).get();
   }
 
-  traerDocumentoObservable(coleccion: string, id: string)
-  {
+  traerDocumentoObservable(coleccion: string, id: string) {
     return this.firestore.doc(coleccion + '/' + id).get();
   }
 
-  getCollectionObservable(coleccion : string)
-  {
+  getCollectionObservable(coleccion: string) {
     return this.firestore.collection(coleccion).valueChanges();
   }
+  
+  getCollectionSnapshot(coleccion: string) {
+    return this.firestore.collection(coleccion).snapshotChanges();
+  }
 
-  getCollectionPromise(coleccion : string)
-  {
+  getCollectionPromise(coleccion: string) {
     return this.firestore.firestore.collection(coleccion).get();
   }
 }

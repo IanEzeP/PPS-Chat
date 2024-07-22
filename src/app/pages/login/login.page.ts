@@ -5,7 +5,7 @@ import { DatabaseService } from 'src/app/services/database.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { Subscription } from 'rxjs';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';//Estos podrían ser llevados a un servicio
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, OnDestroy {
 
   public cargaFin: boolean = false;
   public alertController : any;
@@ -82,6 +82,7 @@ export class LoginPage implements OnInit {
       await this.auth.logIn(tmpUser.correo, tmpUser.clave).then(res =>
       {
         console.log("Usuario valido");
+        this.auth.loggedUser = tmpUser;
         this.auth.email = res!.user.email || '';
         this.auth.perfil = tmpUser.perfil;
         this.auth.id = tmpUser.id;
