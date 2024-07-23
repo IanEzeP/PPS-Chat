@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-chat',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatPage implements OnInit {
 
-  constructor() { }
+  public text: string = '';
+
+  constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {
+  }
+
+  cancel() {
+    return this.modalCtrl.dismiss(null, 'cancel');
+  }
+
+  confirm() {
+    return this.modalCtrl.dismiss(this.text, 'confirm');
   }
 
 }
