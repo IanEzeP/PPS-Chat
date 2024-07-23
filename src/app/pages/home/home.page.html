@@ -1,38 +1,18 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Test Modal (Home page)
+      Conversando en el Aula
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-button (click)="setOpen(true)" expand="block">Open model in-code</ion-button>
-  
-  <ion-modal [isOpen]="isModalOpen">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-button (click)="setOpen(false)">Go back</ion-button>
-          </ion-buttons>
-          <ion-title>Modal</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <ion-item>
-          <ion-input
-            label="Write something"
-            labelPlacement="stacked"
-            type="text"
-            placeholder="waiting inputs..."
-            [(ngModel)]="textInput"
-          ></ion-input>
-        </ion-item>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
 
-  <ion-button expand="block" (click)="openModal()">Open model out-code</ion-button>
-  <p>{{ message }}</p>
+  <ion-button class="claseA" expand="block" (click)="openModal('A')">Grupo PPS-4A</ion-button>
+
+  <ion-button class="claseB" expand="block" (click)="openModal('B')">Grupo PPS-4B</ion-button>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="start">
+    <ion-fab-button color="danger" (click)="cerraSesion()"><ion-icon name="power-sharp" size="large"></ion-icon></ion-fab-button>
+  </ion-fab>
 </ion-content>

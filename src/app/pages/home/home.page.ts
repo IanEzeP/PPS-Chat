@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
-import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components'
 
 import { ModalController } from '@ionic/angular';
 import { ChatPage } from '../chat/chat.page';
@@ -14,47 +12,19 @@ import Swal from 'sweetalert2';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  @ViewChild(IonModal) modal: IonModal;
 
-  public chatModal: any;
+  constructor(private auth: AuthService, private router: Router, private modalCtrl: ModalController) {}
 
-  constructor(private auth: AuthService, private router: Router,
-    private modalCtrl: ModalController) { 
-      this.modal = IonModal.prototype;
-  }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-    this.initializeChat();
-  }
+  async openModal(division: string) {
 
-  async initializeChat() {
-    await this.modalCtrl.create({
+    const modal = await this.modalCtrl.create({
       component: ChatPage,
-    }).then((result) => {
-      console.log("Chat creado");
-      this.chatModal = result;
+      componentProps: { chat: division },
     });
-  }
-  async openModal() {
-    console.log(this.chatModal);
-    this.chatModal.present()
-    .then(()=> console.log("Presento..."))
-    .catch((error : any) => console.log(error));
-
-    const { data, role } = await this.chatModal.onWillDismiss();
-
-    if (role === 'confirm') {
-      this.message = `El mensaje es: ${data}!`;
-    }
-  }
-
-  public textInput: string = '';
-  public message: string = '';
-
-  public isModalOpen = false;
-
-  setOpen(isOpen: boolean) {
-    this.isModalOpen = isOpen;
+    
+    modal.present();
   }
 
   cerraSesion() {

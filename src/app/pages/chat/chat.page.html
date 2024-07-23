@@ -1,20 +1,37 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar style="color: #ffffff;"
+  [ngClass]="{'claseA': this.chat == 'A', 'claseB': this.chat == 'B'}">
     <ion-buttons slot="start">
-      <ion-button (click)="cancel()">Cancel</ion-button>
+      <ion-button (click)="goBack()"><ion-icon name="arrow-back-sharp" size="large"></ion-icon></ion-button>
     </ion-buttons>
-    <ion-title>In the modal</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="confirm()">Confirm</ion-button>
-    </ion-buttons>
+    <ion-title>PPS - 4{{ this.chat }}</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content class="ion-padding">
-  <ion-item>
-    <ion-input
-    labelPlacement="stacked"
-    label="Enter something"
-    [(ngModel)]="text"
-    placeholder="right here..."></ion-input>
-  </ion-item>
+  <div class="message-list" #messagesContainer>
+    <div class="msj" *ngFor="let mensaje of listMessages">
+      <div class="contenedor-mensaje"
+        [ngClass]="{
+          'usuario-actual': mensaje.idEmisor == this.loggedUser.id,
+          'usuario-ajeno': mensaje.idEmisor != loggedUser.id
+        }">
+        <span *ngIf="mensaje.idEmisor != loggedUser.id" style="font-size: small;">{{ getName(mensaje.idEmisor) }}</span>
+        <p style="font-weight: 600; color: black;">{{ mensaje.texto }}</p>
+        <span style="font-size: small;">{{ mensaje.fecha | date }}</span>
+      </div>
+    </div>
+  </div>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-item [ngClass]="{'claseA': this.chat == 'A', 'claseB' : this.chat == 'B'}">
+      <ion-input class="textbox" color="dark" placeholder="Escriba su mensaje" [(ngModel)]="message">
+      </ion-input>
+      <ion-buttons style="color: #ffffff;" slot="end">
+        <ion-button (click)="sendMessage()"><ion-icon name="send-sharp" size="large"></ion-icon></ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

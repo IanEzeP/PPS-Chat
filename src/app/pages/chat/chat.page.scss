@@ -1,0 +1,65 @@
+
+ion-content {
+    width: 100%;
+    height: 80%;
+    --background: rgba(0, 119, 255, 0.8);
+    --background-size: cover;
+    --background-position: center;
+}
+  
+h1 {
+color: #000;
+}
+
+.claseA {
+    --background: #1F9833;
+}
+
+.claseB {
+    --background: #FF6C32;
+}
+
+.textbox {
+    fill-opacity: unset;
+    width: 100%;
+    margin-top: 7px;
+    margin-bottom: 6px;
+    
+    border: 3px solid var(--ion-color-light);
+    border-radius: 3px;
+
+    --padding-bottom: 10px;
+    --padding-end: 10px;
+    --padding-start: 10px;
+    --padding-top: 10px;
+    --background: #fff;
+}
+  
+.contenedor-mensaje {
+    border-radius: 3%;
+    margin: 3px;
+    padding: 5px;
+    display: table-row; /* Hacer que el div se comporte como una fila de la tabla */
+    width: 65%;
+}
+
+span{
+    color:#252424
+}
+
+.usuario-actual {
+    background-color: rgb(177, 192, 186);
+    margin-left: auto; /* Esto empujará el div hacia el margen derecho */
+    margin-right: 10px;
+    float: right; /* Hacer que el div flote hacia la derecha */
+    text-align: right;
+    margin-left: 20px;
+}
+
+.usuario-ajeno {
+    background-color: rgb(225, 225, 225);
+    margin-right: auto; /* Esto empujará el div hacia el margen izquierdo */
+    margin-left: 10px;
+    float: left; /* Hacer que el div flote hacia la izquierda */
+    margin-right: 20px;
+}
