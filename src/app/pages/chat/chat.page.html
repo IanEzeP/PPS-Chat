@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div *ngIf="this.listMessages.length > 0" #messagesContainer>
+  <div class="mensajes" *ngIf="this.listMessages.length > 0" #messagesContainer>
     <div *ngFor="let mensaje of listMessages">
       <div class="contenedor-mensaje"
         [ngClass]="{

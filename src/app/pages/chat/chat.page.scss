@@ -2,13 +2,9 @@
 ion-content {
     width: 100%;
     height: 80%;
-    --background: rgba(0, 119, 255, 0.8);
+    --background: rgba(0, 119, 255, 0.8) url(../../../assets/wallpapers/computer_2.png) center center / cover;
     --background-size: cover;
     --background-position: center;
-}
-  
-h1 {
-    color: #000;
 }
 
 .claseA {
@@ -51,7 +47,7 @@ span{
 }
 
 .usuario-actual {
-    background-color: rgb(38, 219, 207);
+    background-color: rgb(39, 233, 220);
     margin-left: auto; /* Esto empujará el div hacia el margen derecho */
     margin-right: 10px;
     float: right; /* Hacer que el div flote hacia la derecha */
@@ -65,7 +61,7 @@ span{
 }
 
 .usuario-ajeno {
-    background-color: rgb(225, 225, 225);
+    background-color: rgb(245, 245, 245);
     margin-right: auto; /* Esto empujará el div hacia el margen izquierdo */
     margin-left: 10px;
     float: left; /* Hacer que el div flote hacia la izquierda */
