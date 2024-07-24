@@ -13,7 +13,7 @@
     <div *ngIf="this.cargaFin == true; then mostrar else esperar"></div>
 
     <ng-template #mostrar>
-      <ion-select label="Usuario rápido" fill="solid" (ionChange)="onQuickUser($event)">
+      <ion-select label="Usuario rápido" fill="solid" interface="popover" (ionChange)="onQuickUser($event)">
         <ion-select-option *ngFor="let item of arrayTestUsers" [value]="item">{{item.perfil}}</ion-select-option>
       </ion-select>
     </ng-template>

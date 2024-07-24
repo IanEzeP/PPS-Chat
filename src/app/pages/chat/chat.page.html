@@ -9,16 +9,16 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="message-list" #messagesContainer>
-    <div class="msj" *ngFor="let mensaje of listMessages">
+  <div *ngIf="this.listMessages.length > 0" #messagesContainer>
+    <div *ngFor="let mensaje of listMessages">
       <div class="contenedor-mensaje"
         [ngClass]="{
           'usuario-actual': mensaje.idEmisor == this.loggedUser.id,
           'usuario-ajeno': mensaje.idEmisor != loggedUser.id
         }">
         <span *ngIf="mensaje.idEmisor != loggedUser.id" style="font-size: small;">{{ getName(mensaje.idEmisor) }}</span>
-        <p style="font-weight: 600; color: black;">{{ mensaje.texto }}</p>
-        <span style="font-size: small;">{{ mensaje.fecha | date }}</span>
+        <p style="font-weight: 500; color: black;">{{ mensaje.texto }}</p>
+        <span class="time">{{ mensaje.fecha | date:'dd/MM/yyyy - HH:mm' }}</span>
       </div>
     </div>
   </div>

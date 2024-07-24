@@ -8,7 +8,7 @@ ion-content {
 }
   
 h1 {
-color: #000;
+    color: #000;
 }
 
 .claseA {
@@ -39,21 +39,29 @@ color: #000;
     border-radius: 3%;
     margin: 3px;
     padding: 5px;
-    display: table-row; /* Hacer que el div se comporte como una fila de la tabla */
-    width: 65%;
+    display: table-row;
+    width: 60%;
 }
 
 span{
-    color:#252424
+    color:#2f2e2e
+}
+.time {
+    font-size: small;
 }
 
 .usuario-actual {
-    background-color: rgb(177, 192, 186);
+    background-color: rgb(38, 219, 207);
     margin-left: auto; /* Esto empujará el div hacia el margen derecho */
     margin-right: 10px;
     float: right; /* Hacer que el div flote hacia la derecha */
     text-align: right;
-    margin-left: 20px;
+    //margin-left: 20px;
+    p{
+        font-size: 18px;
+        margin-bottom: 1px;
+        margin-top: 6px;
+    }
 }
 
 .usuario-ajeno {
@@ -61,5 +69,11 @@ span{
     margin-right: auto; /* Esto empujará el div hacia el margen izquierdo */
     margin-left: 10px;
     float: left; /* Hacer que el div flote hacia la izquierda */
-    margin-right: 20px;
+    //margin-right: 20px;
+
+    p{
+        font-size: 18px;
+        margin-bottom: 1px;
+        margin-top: 8px;
+    }
 }
