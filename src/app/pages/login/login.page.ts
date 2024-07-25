@@ -62,14 +62,28 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
   async iniciarSesion() {
+    let tmpUser: User = User.initialize();
+
     if (this.formLog.valid) {
       this.alertaEspera();
 
       let formValues = this.formLog.value;
-      
-      await this.auth.logIn(formValues.email, formValues.password).then(res => {
+    
+      this.arrayFirebase.forEach(usuario => {
+        if (usuario.correo == formValues.email && usuario.clave == formValues.password) {
+          tmpUser = usuario;
+          return;
+        }
+      });
+      await this.auth.logIn(tmpUser.correo, tmpUser.clave).then(res => {
         console.log("Usuario valido");
+
+        this.auth.loggedUser = tmpUser;
         this.auth.email = res!.user.email || '';
+        this.auth.perfil = tmpUser.perfil;
+        this.auth.id = tmpUser.id;
+        this.auth.nombre = tmpUser.nombre;
+        this.auth.sexo = tmpUser.sexo;
 
         setTimeout(() => {
           
