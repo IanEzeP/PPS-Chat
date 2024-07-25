@@ -14,12 +14,12 @@ export class AuthService {
 
   public loggedUser: any;
 
-  public logueado : boolean = false;
-  public email : string = "";
-  public perfil : string = "";
-  public id : number = 0;
-  public nombre : string = "";
-  public sexo : string = "";
+  public logueado: boolean = false;
+  public email: string = "";
+  public perfil: string = "";
+  public id: number = 0;
+  public nombre: string = "";
+  public sexo: string = "";
   // Esto está mal, debería guardar una instancia de Usuario con todos los datos cargados
 
   constructor(private auth: Auth) { }
@@ -46,6 +46,7 @@ export class AuthService {
     this.nombre = '';
     this.id = 0;
     this.sexo = '';
+    this.loggedUser = undefined;
     
     return await signOut(this.auth);
   }
@@ -58,7 +59,7 @@ export class AuthService {
 
       if(user != null)
       {
-        await sendEmailVerification(user);
+        //await sendEmailVerification(user);
         this.logueado = false;
       }
   }

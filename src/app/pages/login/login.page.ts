@@ -16,13 +16,13 @@ import Swal from 'sweetalert2';
 export class LoginPage implements OnInit, OnDestroy {
 
   public cargaFin: boolean = false;
-  public alertController : any;
+  public alertController: any;
 
   public arrayFirebase: Array<User> = [];
   public arrayTestUsers: Array<User> = [];
-  public formLog : FormGroup;
+  public formLog: FormGroup;
 
-  private obsDatabase: Subscription = Subscription.EMPTY;
+  private subsDatabase: Subscription = Subscription.EMPTY;
 
   constructor(private alert: AlertService, private router: Router, private data: DatabaseService,
     private auth: AuthService, public formBuilder: FormBuilder) 
@@ -37,8 +37,7 @@ export class LoginPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.cleanInputs();
     
-    this.obsDatabase = this.data.getCollectionObservable('usuarios').subscribe((next: any) =>
-    {
+    this.subsDatabase = this.data.getCollectionObservable('usuarios').subscribe((next: any) => {
       let result: Array<any> = next;
       this.arrayFirebase = [];
       this.arrayTestUsers = [];
@@ -47,10 +46,8 @@ export class LoginPage implements OnInit, OnDestroy {
         this.arrayFirebase.push(new User(obj.id, obj.correo, obj.clave, obj.perfil, obj.sexo, obj.nombre));
       });
       
-      this.arrayFirebase.forEach(user => 
-      {
-        if(user.id == 1 || user.id == 2 || user.id == 3)
-        {
+      this.arrayFirebase.forEach(user => {
+        if (user.id == 1 || user.id == 2 || user.id == 3) {
           this.arrayTestUsers.push(user);
         }
 
@@ -61,33 +58,18 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.obsDatabase.unsubscribe();
+    this.subsDatabase.unsubscribe();
   }
 
   async iniciarSesion() {
-    let tmpUser: User = User.initialize();
-
-    if(this.formLog.valid)
-    {
+    if (this.formLog.valid) {
       this.alertaEspera();
 
       let formValues = this.formLog.value;
-      this.arrayFirebase.forEach(usuario => 
-      {
-        if(usuario.correo == formValues.email && usuario.clave == formValues.password)
-        {
-          tmpUser = usuario;
-        }
-      });
-      await this.auth.logIn(tmpUser.correo, tmpUser.clave).then(res =>
-      {
+      
+      await this.auth.logIn(formValues.email, formValues.password).then(res => {
         console.log("Usuario valido");
-        this.auth.loggedUser = tmpUser;
         this.auth.email = res!.user.email || '';
-        this.auth.perfil = tmpUser.perfil;
-        this.auth.id = tmpUser.id;
-        this.auth.nombre = tmpUser.nombre;
-        this.auth.sexo = tmpUser.sexo;
 
         setTimeout(() => {
           
@@ -96,10 +78,11 @@ export class LoginPage implements OnInit, OnDestroy {
           this.cleanInputs();
           this.router.navigateByUrl('/home');
         }, 1500);
-      }
-      ).catch(() => {
-        if(Swal.isVisible())
-        {
+      })
+      .catch(err => {
+        console.error(err);
+
+        if (Swal.isVisible()) {
           setTimeout(() => {
             
             this.auth.logOut();
@@ -108,9 +91,7 @@ export class LoginPage implements OnInit, OnDestroy {
           }, 1000);
         }
       });
-    }
-    else
-    {
+    } else {
       this.alert.sweetAlert('Error', 'Debe llenar los campos para iniciar sesión', 'error');
     }
   }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { map, first } from 'rxjs';
 import { User } from '../classes/user';
 
 @Injectable({
@@ -22,6 +23,31 @@ export class DatabaseService {
       });
     });
     console.log("Finalizo inicializacion");
+  }
+
+  obtenerUsuarioPorEmail(email: string) : Promise<any|null> {
+    const usrPromise = this.firestore.collection('usuarios', ref => ref.where('correo', '==', email)).snapshotChanges()
+    .pipe(
+      map(actions => {
+        if (actions.length === 0) {
+          return null; // No encontró usuario
+        }
+        
+        const data = actions[0].payload.doc.data() as any;
+        const id = actions[0].payload.doc.id;
+        return { id, ...data }; // Retorna el primer usuario encontrado
+        }),
+      first()
+    )
+    .toPromise()
+    .catch(error => {
+      console.error('Error retrieving from usuarios:', error);
+      return null;
+    });
+
+    console.log("Comprobamos si usrPromise encontro usuario: " + usrPromise);
+
+    return usrPromise;
   }
 
   traerUnDocumento(coleccion: string, id: string) {
