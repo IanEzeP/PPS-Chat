@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'pps.iep.chat',
-  appName: 'Conversando en el aula',
+  appName: 'Conversando aula',
   webDir: 'www'
 };
 
